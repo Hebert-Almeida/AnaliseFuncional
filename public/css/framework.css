@@ -1,0 +1,368 @@
+/* Estilos específicos do quadro de conexões */
+body {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+    overflow: hidden;
+}
+
+.logo span {
+    color: #60a5fa;
+    font-weight: bold;
+}
+
+/* Canvas e Board */
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+#board {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+}
+
+/* Nodes (itens do quadro) */
+.node {
+    position: absolute;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    cursor: move;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    min-width: 120px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    pointer-events: auto;
+}
+
+.node:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+.node.dragging {
+    opacity: 0.8;
+    z-index: 1000;
+}
+
+.node.connecting {
+    border-color: #fbbf24;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    animation: pulse 1s infinite;
+}
+
+.node.connecting-target {
+    border-color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+    animation: pulse-green 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); }
+    50%       { box-shadow: 0 0 30px rgba(251, 191, 36, 0.9); }
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
+    50%       { box-shadow: 0 0 30px rgba(16, 185, 129, 0.9); }
+}
+
+.node-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.node-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+/* Botões dos nodes */
+.node-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.btn-connect {
+    background: rgba(251, 191, 36, 0.9);
+    color: #1e3a8a;
+}
+
+.btn-connect:hover {
+    background: #fbbf24;
+    transform: translateY(-2px);
+}
+
+.btn-connect:active {
+    transform: translateY(1px);
+}
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #ef4444;
+    transform: translateY(-2px);
+}
+
+.btn-delete:active {
+    transform: translateY(1px);
+}
+
+/* Controles laterais */
+.controls {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+.controls .btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+    border: none !important;
+    padding: 12px 24px;
+    border-radius: 12px !important;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.controls .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+.controls .btn:active {
+    transform: translateY(1px);
+}
+
+/* Controles de Zoom */
+.zoom-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn {
+    background: white;
+    color: #1e3a8a;
+    border: 2px solid #e5e7eb !important;
+    padding: 8px 16px;
+    border-radius: 8px !important;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    font-size: 16px;
+    min-width: 45px;
+}
+
+.zoom-btn:hover {
+    background: #f3f4f6;
+    border-color: #3b82f6 !important;
+    color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.zoom-btn:active {
+    transform: translateY(1px);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    min-width: 350px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content h3 {
+    margin: 0 0 20px 0;
+    color: #1e3a8a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-actions .btn {
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none !important;
+}
+
+.btn-cancel {
+    background: #6b7280 !important;
+}
+
+.btn-cancel:hover {
+    background: #4b5563 !important;
+}
+
+/* Modal de tipos de conexão */
+.connection-types-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.connection-type-btn {
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: white;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    text-align: center;
+}
+
+.connection-type-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.connection-type-btn.positive-reinforcement { background: #10b981; }
+.connection-type-btn.negative-reinforcement { background: #3b82f6; }
+.connection-type-btn.positive-punishment    { background: #ef4444; }
+.connection-type-btn.negative-punishment    { background: #f97316; }
+.connection-type-btn.other                  { background: #8b5cf6; grid-column: 1 / -1; }
+
+#customNameSection {
+    display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #e5e7eb;
+}
+
+#customNameSection input {
+    margin-bottom: 15px;
+}
+
+/* Painel de informações */
+.info-panel {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    color: #1e3a8a;
+    max-width: 250px;
+    backdrop-filter: blur(10px);
+}
+
+.info-panel h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.info-panel ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.info-panel li {
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+/* Ajustes para o container da aplicação */
+.container.app {
+    position: relative;
+    overflow: hidden;
+}

@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap);
+
+/* Geral */
+* {
+	font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* Containers */
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 80vh;
+    width: 100%;
+}
+
+.container.intro > .subtitle{
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Header */
+.logo, .header--items{
+    margin-left: 20px;
+}
+
+/* Botoes */
+button{
+    height: 50px;
+    width: 200px;
+    margin-top: 20px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: transparent;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    transition: 0.4s all ease;
+    cursor: pointer;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    color: #fff;
+    background-color: #222;
+    border: #333;
+}
+
+button:active{
+    transform: translateY(4px);
+    color: #fff;
+    background-color: #222;
+    border: #333;
+}

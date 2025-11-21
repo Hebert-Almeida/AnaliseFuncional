@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto The Sims</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <main class="flex items-center justify-center w-full h-full flex-col text-center">
+        <header class="bg-transparent w-full h-[10dvh] flex items-center justify-between">
+            <div class="logo">
+                <p>Plataforma <span>//Nome da Plataforma</span></p>
+            </div>
+            <div class="header--items"></div>
+        </header>
+        <div class="container intro">
+            <h1 class="text-4xl font-bold">Conheça a plataforma <span class="italic">//Nome da Plataforma!</span></h1>
+            <br>
+            <p class="subtitle">Feita para auxiliar no processo psicológico de reconhecimento de comportamentos!</p>
+            <div class="buttons flex items-center justify-center gap-5 flex-wrap">
+                <button onclick="newProcess()">Começar novo processo</button>
+                <button onclick="oldProcess()">Continuar processo antigo</button>
+            </div>
+        </div>
+        <footer class="bg-transparent w-full h-[10dvh] flex items-center justify-center">
+            <p>Criado com amor e cafeína por Hebert</p>
+        </footer>
+    </main>
+
+    <script>
+        function newProcess() {
+            window.location.href = './public/pages/app-screen.html'
+        }
+
+        function oldProcess() {
+            window.location.href = './public/pages/old-process.html'
+        }
+    </script>
+</body>
+
+</html>
